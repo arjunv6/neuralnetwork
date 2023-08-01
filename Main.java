@@ -1,12 +1,13 @@
-package neuralnetwork;
 import java.util.Random;
 public class Main {
 	public static void main(String[] args) {
-		int inputsize = 5;
-		int hiddensize = 11;
+		int inputsize = 3;
+		int hiddensize = 4;
 		int outputsize = 2;
 		NeuralNetwork nn = new NeuralNetwork(inputsize, hiddensize, outputsize);
 		System.out.println(nn);
+		double[] input = {1, 2, 3};
+		nn.forwardPass(input, true);
 	}
 }
 
@@ -26,17 +27,35 @@ class NeuralNetwork {
 		weights_ho = new Matrix(o,h,r);
 	}
 	public String toString() { // method
-		String nn = "Here is the input size: " + inputsize + 
-				"\nHere is the hidden size: "  + hiddensize + 
-				"\nHere is the output size: " + outputsize +
-				"\nThe following are the weights of the Neural Network--";
+		String nn = "input size: " + inputsize + 
+				"\nhidden size: "  + hiddensize + 
+				"\noutput size: " + outputsize +
+				"\nWeights IH--" +
+				"\n";
 		nn+= weights_ih;
+		nn+= "\nWeights HO--\n";
+		nn+= weights_ho;
 		return nn;
 	}
-	/*public double[] forwardPass(double[] input) {
+	public double[] forwardPass(double[] input, boolean verbose) {
 		// Takes in an input, does calculation, returns output
-		
-	} */
+		Matrix inputm = new Matrix(input);
+		Matrix hiddenactivation = Matrix.multiply(weights_ih, inputm);
+		if (verbose) { 
+			System.out.println("Hidden activation before sigmoid : \n" + hiddenactivation);
+		}
+		hiddenactivation.sigmoid();
+		if (verbose) { 
+			System.out.println("Hidden activation after sigmoid : \n" + hiddenactivation);
+		}
+		Matrix output = Matrix.multiply(weights_ho, hiddenactivation);
+		output.sigmoid();
+		double[] outputArray = new double[outputsize];
+		for (int i = 0; i < outputsize; i++) {
+		   outputArray[i] = output.M[i][0];
+		}
+		return outputArray;
+	}
 }
 class Matrix {
     // all things matrices. this class can be instantiated as a matrix (and then operated upon) and also has static functions
@@ -280,15 +299,15 @@ class Matrix {
         }
         return r;
     }
-
     public String toString() {
-        String s = "";
-        for (int i = 0; i < M.length; i++) {
-            s += "\n";
-            for (int j = 0; j < M[0].length; j++) {
-                s += M[i][j] + "  ";
-            }
-        }
-        return s;
+    	String s = "";
+    	for (int i=0; i < M.length;i++) {
+    		
+    		for (int j=0;j < M[0].length;j++) {
+    			s += M[i][j] + " ";
+    		}
+    		s += "\n";
+    	}
+    return s;
     }
 }
