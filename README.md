@@ -1,5 +1,10 @@
 # neuralnetwork
 
+## For August 3
+- [ ] Find or recreate your work for performing a forward pass by hand.
+- [ ] Add bias vectors to the neural network class; use them in the forward pass method.
+- [ ] Finish adding print statements in the forward pass method which execute only when the 'verbose' parameter is 'true'.
+
 ## For July 28
 - [ ] Check the computations of the forward pass method by hand. Do it once by thinking of it as a neural network; do it again by thinking of it as matrix operations.
 - [ ] Stetch goal: for some other input, do it out again (both ways if you like) and then only run the code afterwards for that input to see if you get the same result as the code.
