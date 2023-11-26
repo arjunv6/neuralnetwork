@@ -1,5 +1,10 @@
 # neuralnetwork
 
+## To do
+- [ ] write code to load the data
+- [ ] make the number of layers variable
+- [ ] (Oliver) get back propogation code ready
+
 ## For August 3
 - [ ] Find or recreate your work for performing a forward pass by hand.
 - [ ] Add bias vectors to the neural network class; use them in the forward pass method.
